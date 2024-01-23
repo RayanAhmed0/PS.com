@@ -1,0 +1,32 @@
+﻿@model List<Product>
+<partial Title="_Notification" />
+<div class="container c2">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2>Product List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Product" asp-action="Upsert" class="btn btn-dark">
+                <i class="bi bi-plus-circle"></i>
+                Create New Product
+            </a>
+        </div>
+    </div>
+    <div class="table-responsive">
+    <table id="tableData" class="table table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th class="text-dark">Product</th>
+                <th class="text-dark">Description</th>
+                <th class="text-dark">Price</th>
+                <th class="text-dark">Category</th>
+                <th class="text-dark">Actions</th>
+            </tr>
+        </thead>
+
+        </table>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/product.js"></script>
+}

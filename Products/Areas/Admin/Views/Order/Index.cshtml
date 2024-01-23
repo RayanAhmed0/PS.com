@@ -1,0 +1,106 @@
+﻿@{
+    var status = Context.Request.Query["status"];
+    var pending = "text-secondary";
+    var inprocess = "text-secondary";
+    var completed = "text-secondary";
+    var approved = "text-secondary";
+    var all = "text-secondary";
+
+    switch (status)
+    {
+        case "pending":
+            pending = "active text-white bg-secondary";
+            break;
+        case "inprocess":
+            inprocess = "active text-white bg-secondary";
+            break;
+        case "completed":
+            completed = "active text-white bg-secondary";
+            break;
+        case "approved":
+            approved = "active text-white bg-secondary";
+            break;
+        default:
+            all = "active text-white bg-secondary";
+            break;
+    }
+
+}
+
+
+
+<partial Title="_Notification" />
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2>Order List</h2>
+        </div>
+
+    </div>
+
+
+    <div class="card c2 mt-4">
+        <div class="card-header">
+            <h2>@ViewData["Title"]</h2>
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <section>
+                            <div class="d-flex justify-content-center pb-5 pt-2">
+                                <span>
+                                    <ul class="list-group list-group-horizontal-sm">
+                                        <a style="text-decoration:none;" asp-controller="Order" asp- action="Index"
+                                           asp-route-status="inprocess">
+                                        <li class="list-group-item @inprocess">In Process</li>
+                                        </a>
+                                        <a style="text-decoration:none;" asp-controller="Order" asp- action="Index"
+                                           asp-route-status="pending">
+                                        <li class="list-group-item @pending">Payment pending</li>
+                                        </a>
+                                        <a style="text-decoration:none;" asp-controller="Order" asp- action="Index"
+                                           asp-route-status="completed">
+                                        <li class="list-group-item @completed">Completed</li>
+                                        </a>
+                                        <a style="text-decoration:none;" asp-controller="Order" asp- action="Index"
+                                           asp-route-status="approved">
+                                        <li class="list-group-item @approved">Approved</li>
+                                        </a>
+                                        <a style="text-decoration:none;" asp-controller="Order" asp- action="Index"
+                                           asp-route-status="all">
+                                        <li class="list-group-item @all">All</li>
+                                        </a>
+                                    </ul>
+
+
+                                </span>
+
+                            </div>
+                            <div class="table-responsive">
+
+                            <table id="tableData" class="table table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th class="text-dark">ID</th>
+                                        <th class="text-dark">Name</th>
+                                        <th class="text-dark">Phone Number</th>
+                                        <th class="text-dark">Email</th>
+                                        <th class="text-dark">Status</th>
+                                        <th class="text-dark">Total</th>
+                                        <th class="text-dark">Actions</th>
+
+                                    </tr>
+                                </thead>
+                            </table>
+                            </div>
+                        </section>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+@section Scripts{
+    <script src="~/js/order.js"></script>
+}

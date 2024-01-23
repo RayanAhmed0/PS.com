@@ -1,0 +1,62 @@
+﻿@model List<Company>
+<partial Title="_Notification" />
+<div class="container c2">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2>Company List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Company" asp-action="Upsert" class="btn btn-secondary">
+                <i class="bi bi-plus-circle"></i>
+                Create New Company
+            </a>
+        </div>
+    </div>
+    <div class="table-responsive">
+
+    <table id="tableData" class="table table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th class="text-dark">Name</th>
+                <th class="text-dark">Phonenumber</th>
+                <th class="text-dark">City</th>
+                <th class="text-dark">State</th>
+                <th class="text-dark">StreetAddress</th>
+                <th class="text-dark">PostalCode</th>
+                <th class="text-dark">Actions</th>
+            </tr>
+        </thead>
+        @*  <tbody>
+        @foreach (var obj in Model)
+        {
+        <tr>
+        <td>@obj.Title</td>
+        <td>@obj.Description</td>
+        <td>@obj.Price</td>
+        <td>@obj.Category.Name</td>
+        <td><img src="@obj.ImageUrl" style="max-width:200px" /></td>
+
+        <td>
+        <div class="w-75 btn-group" role="group">
+        <a asp-controller="Product" asp-action="Upsert" asp-route-Id="@obj.Id" class="btn btn-primary mx-2">
+        <i class="bi bi-pencil-square"></i> Edit
+        </a>
+
+        <a asp-controller="Product" asp-action="Delete" asp-route-Id="@obj.Id" class="btn btn-danger mx-2">
+        <i class="bi bi-trash"></i>
+        Delete
+        </a>
+        </div>
+        </td>
+
+        </tr>
+        }
+
+
+        </tbody>*@
+    </table>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/company.js"></script>
+}

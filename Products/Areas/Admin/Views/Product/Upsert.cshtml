@@ -1,0 +1,101 @@
+﻿@model ProductVM
+
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        <input asp-for="Product.Id" hidden />
+
+        <div class="row">
+
+            <div class="col-8">
+                <div class="border p-3 mt-4">
+                    <div class="row pb-2">
+                        <h2 class="text-secondary">@(Model.Product.Id != 0 ? "Update" : "Create") Product</h2>
+                        <hr />
+                    </div>
+                    <div asp-validation-summary="All"></div>
+                    <div class="mb-3 row">
+                        <label asp-for="Product.Title" class="p-0"></label> @* we can either hardcode the text or put asp-for to show it*@
+                        <input asp-for="Product.Title" type="text" class="form-control" />
+                        <span asp-validation-for="Product.Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label asp-for="Product.Description" class="p-0"></label>
+                        <textarea id="descriptionTextArea" asp-for="Product.Description" class="form-control"></textarea>
+
+                    </div>
+                    <div class="mb-3 row">
+                        <label asp-for="Product.Price" class="p-0"></label>
+                        <input asp-for="Product.Price" class="form-control" />
+                        <span asp-validation-for="Product.Price" class="text-danger"></span>
+
+                    </div>
+                    <div class="mb-3 row">
+                        <label asp-for="Product.CategoryId" class="p-0"></label>
+                        <select asp-for="Product.CategoryId" class="form-select" asp-items="@Model.CategoryList">
+                            <option disabled selected>Please Select the Category</option>
+                        </select>
+                        <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+
+                    </div>
+                    <div class="mb-3 row">
+                        @*                        <label asp-for="Product.ImageUrl" class="p-0"></label>
+                        *@                        <input type="file" name="files" class="form-control" multiple />
+                        <span asp-validation-for="Product.ProductImages" class="text-danger"></span>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-3">
+                            @if (Model.Product.Id != 0)
+                            {
+                                <button type="submit" class="btn btn-secondary form-control">Update</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-secondary form-control">Create</button>
+                            }
+                        </div>
+                        <div class="col-6 col-md-3"><a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary border form-control">Go back</a></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="border p-3 mt-4">
+                    <div class="row pb-2">
+                        <h2 class="text-secondary">Product Image</h2>
+                        <hr />
+                    </div>
+                    @if (Model.Product.ProductImages != null)
+
+                    {
+
+                        foreach (var image in Model.Product.ProductImages)
+                        {
+                            <div class="border p-1 m-2 text-center">
+                                <img src="@image.ImageUrl" style="width:100%" /> 
+                                <a asp-action="DeleteImage" class="btn btn-danger" asp-route-imageId="@image.Id"><i class="bg-info bi=trash-fill"></i>Delete</a>
+                            </div>
+
+                        }
+
+                    }
+
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+@section Scripts{
+    <script>
+        tinymce.init({
+            selector: '#descriptionTextArea'
+        });
+    </script>
+    @{
+        <partial Title="_ValidationScriptsPartial" />
+    }
+}
